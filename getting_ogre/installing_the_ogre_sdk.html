@@ -2,15 +2,76 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<link rel="stylesheet" href="../common/css/article.css" type="text/css" />
-	<script src="../common/js/article_blocks.js"></script>
-	<script>WEB_ROOT="../"</script>
+	<script src="../common/js/article_blocks.js"></script><script>WEB_ROOT="../"</script>
+	<script type="text/javascript" src="../common/sh/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../common/sh/scripts/shBrushPowerShell.js"></script>
+	<script type="text/javascript" src="../common/sh/scripts/shBrushBash.js"></script>
+	<link type="text/css" rel="stylesheet" href="../common/sh/styles/shCoreDefault.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	
 </head>
 <body>
 <div id="all">
 	<script>block_small_tip("下面的步骤是安装预编译的OGRE SDK，"+
 		"如果你想自己编译， 请参看<a href=\"./building_ogre/index.html\" target=\"inner_content\">构建OGRE</a>");</script>
 	<h3><a>Microsoft Windows</a></h3>
-	<h4></h4>
+	<h4>准备</h4>
+		<ol>
+			<li>Go to <a href="http://www.ogre3d.org/download/sdk">SDK 下载</a></li>
+			<li>Download the SDK matching your IDE version.</li>
+			<li>Download and install <a href="http://www.microsoft.com/downloads/details.aspx?FamilyID=04ac064b-00d1-474e-b7b1-442d8712d553&displaylang=en">DirectX: directx_aug2009_redist.exe</a></li>
+		</ol>
+	<h4>运行安装文件</h4>
+		<img src="./images/ogre_wininstaller.png"/>
+	<h4>解压到合适的位置</h4>
+		<img src="./images/sdkextract.png"/>
+	<h4>进入刚才安装的位置， 复制其完整路径</h4>
+		<img src="./images/copypath.png"/>
+	<h4>打开命令提示符设定OGRE_HOME环境变量为刚才复制的路径</h4>
+		<p>因为你刚才是复制的路径， 因此这里你可以直接粘贴</p>
+		<img src="./images/setenvirontment.png"/>
+	
+		<pre class="brush: powershell;">setx OGRE_HOME D:\OgreSDK\OgreSDK_vc9_v1-7-1</pre>
+		<p>Windows XP</p>
+		<pre class="brush: powershell;">set OGRE_HOME="D:\OgreSDK\OgreSDK_vc9_v1-7-1"</pre>
+	<h4>完成</h4>
+		<p>编译例子需要先安装 CMake， 然后使用Visual Studio（Visual Studio 2008是可以的）, 将 SampleBrowser 设定为默认工程, 编译然后运行.</p>
+	<h4>接下来</h4>
+		你可以继续看 <a href="./setting_up_an_application/index.html">编写一个基础程序</a> , and/or visit the <a href="../using_ogre/tutorials/index.html">Ogre 教程</a>
+		
+	<h3>Linux</h3>
+	<p>下面的内容适合想要在Linux平台上安装预编译的 OGRE SDK 的开发者.<br/>
+		Unix 用户喜欢编译安装所有的软件， 包括Ogre。<br/>
+		但是我们针对大多数的发行版都提供了预编译的包。请查看你的发行版是否在下方的列表中。</p>
+	<h4>Ubuntu</h4>
+	<h5>使用PPA源</h5>
+	<ol><li>添加PPA<pre class="brush: bash;">sudo add-apt-repository ppa:ogre-team/ogre</pre></li>
+		<li>更新缓存<pre class="brush: bash;">sudo apt-get update</pre></li>
+		<li>安装 libogre-dev:<pre class="brush: bash;">sudo apt-get install libogre-dev</pre></li>
+	</ol>
+	<h4>接下来</h4>
+		你可以继续看 <a href="./setting_up_an_application/index.html">编写一个基础程序</a> , and/or visit the <a href="../using_ogre/tutorials/index.html">Ogre 教程</a>
+	
+	<h3>Mac OS X</h3>
+		<p>This section is for developers willing to install a precompiled Software Development Kit (SDK) under Mac OS X platform.</p>
+		<p>Once you have OGRE downloaded and setup, learn how to setup your first application.</p>
+		<ol>
+			<li>Go to <a href="http://www.ogre3d.org">http://www.ogre3d.org</a> and click on Download.</li>
+			<li>Next click on Download a Prebuilt SDK.</li>
+			<li>Download the latest OSX SDK.</li>
+			<li>Double-click the .dmg to mount it</li>
+			<li>Drag & drop the OgreSDK folder wherever you like to install the SDK</li>
+			<li>Install CMake for building the samples. Version 2.8.0 is said to be the most stable version for this. <a href="http://www.cmake.org/files/v2.8/">Cmake v2.8</a> (if you have a MacPorts installation of cmake, read the section below.)</li>
+			<li>You might need this as well <a href="http://developer.nvidia.com/object/cg_download.html">CG Toolkit</a> (the download is only available for registered members of Nvidia Developer Zone. You may create your own account or use one of those <a href="http://www.bugmenot.com/view/nvidia.com">BugMeNot</a>)</li>
+			<li>Start up Xcode and load the OgreSDK/OGRE.xcodeproj to build the samples. You probably want to build the debug versions of these. It will give you more insight when things go wrong. Make sure you select that from the build type dropdown.</li>
+			<li>After you have built the samples look for them in OgreSDK/bin/debug. You should see SampleBrowser.app in there. Fire it up!</li>
+		</ol>
+		<h4>Cmake over MacPorts</h4>
+			<p>If you have installed Cmake over MacPorts, you need to do some replacement inside CMakeScripts/ReRunCMake.make:</p>
+			<ul>
+				<li>replace /Applications/CMake\ 2.8-5.app/Contents/share/cmake-2.8/Modules/ by /opt/local/share/cmake-2.8/Modules/</li>
+				<li>replace /Applications/CMake\ 2.8-5.app/Contents/bin/cmake by /opt/local/bin/cmake</li>
+			</ul>
 </div>
 </body>
 </html>

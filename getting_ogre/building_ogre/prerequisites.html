@@ -1,0 +1,73 @@
+﻿<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="stylesheet" href="../../common/css/article.css" type="text/css" />
+	<script src="../../common/js/article_blocks.js"></script><script>WEB_ROOT="../../"</script>
+	<script type="text/javascript" src="../../common/sh/scripts/shCore.js"></script>
+	<script type="text/javascript" src="../../common/sh/scripts/shBrushPowerShell.js"></script>
+	<script type="text/javascript" src="../../common/sh/scripts/shBrushBash.js"></script>
+	<link type="text/css" rel="stylesheet" href="../../common/sh/styles/shCoreDefault.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+	
+</head>
+<body>
+<div id="all">
+	<h3>简介</h3>
+		<p>下面是你要准备的东西的清单</p>
+	<h3>Microsoft Windows</h3>
+		<h4>准备编译器</h4>
+			<h5>Visual Studio</h5>
+				<table border="1">
+					<tr><td>Visual Studio 2008 (VC9)</td><td>Service pack 1 and the ATL security fix (available from Microsoft Update).</td></tr>
+					<tr><td>Visual Studio 2005 (VC8)</td><td>Service pack 1</td></tr>
+				</table>
+				<p>使用Express版本的用户不用单独安装更新包， 或者ATL安全更新， 因为最新下载的安装程序已经包含了这些补丁。 <a href="http://www.microsoft.com/express/Downloads/">从这下载</a></p>
+			<h5>MinGW</h5>
+				<p>最新版 SDK: 使用 MinGW 的 MinGW, 不要用 TDM 的!</p>
+				<p>注意： 最新版本的CMake存在bug使得ogre在MinGW上构建不成功。 请使用早期版本的CMake（测试成成功的最新的版本是2.8.3）</p>
+				<p>早期的Ogre sdk: 你需要使用来自Twilight Dragon Media（TDM）的 <a href="http://www.tdragon.net/recentgcc/">MinGW</a>中的GCC才能构建， 因为截止这篇文章完成时是tdm-mingw-1.908.0-4.4.1-2, 使用 GCC 4.4.1。早期版本的Ogre sdk 不能使用官方MinGW进行编译， 因为早期版本的Ogre sdk只能使用4.4.x的GCC才能进行编译。</p>
+				<p>将MinGW安装到 C:\mingw 然后将 C:\mingw\bin 添加到 PATH.</p>
+				
+
+	<script  type="text/javascript">block_small_tip("使用源代码构建Ogre SDK");</script>
+	<p>对于有开发经验的人来说， 他们更喜欢从源代码编译。 某些平台没有提供预编译的SDK， 也需要自己编译。从源代码编译的SDK更新， 同时允许开发者对自己或是ogre的代码进行各方面的调试。如果你想贡献补丁， 这也是必需的步骤。</p>
+	<p>注意：从版本 1.7 (Cthugha), Ogre 使用 CMake 作为主要的构建系统. 对于以前的版本， 参考 <a href="./building_ogre_shoggoth.html">构建旧版 Ogre</a>.</p>
+	
+	<p>你可以从 Mercurial获取 <a href="http://www.ogre3d.org/developers/mercurial">最新稳定代码</a>（适用于所有平台）. 如果你使用windows平台， 你可能还需要阅读 <a href="./getting_source_using_tortoisehg.html">使用 TortoiseHG 获取源码</a></p>
+	<p>实际上的稳定版是某些特定的分支， 比如Cthugha的"v1-7"分支就是一个稳定版， 而不是Cthugha的主分支。主分支是最新的非稳定版， 并且和稳定版的API标准不完全兼容， 并且也有可能有错误， 只用于有经验的开发者。</p>
+	<h3>Mercurial 简短指南</h3>
+		<p>克隆 OGRE 当前稳定版本 (Cthugha) :</p>
+		<pre class="brush: bash;">hg clone https://bitbucket.org/sinbad/ogre/ -u v1-7</pre>
+		<p>克隆非稳定版 :</p>
+		<pre class="brush: bash;">hg clone https://bitbucket.org/sinbad/ogre/</pre>
+		<p>注意：你可以在分支之间随意切换， 使用下面的代码切换到稳定版</p>
+		<pre class="brush: bash;">hg update v1-7</pre>
+	<hr/>
+	
+	<ul>
+		<li><a href="./building_ogre/prerequisites.html" target="inner_content">构建前的准备</a>
+			<p>构建的准备工作</p>
+		</li>
+		<li><a href="./building_ogre/quick_start_guide.html" target="inner_content">快速构建Ogre</a>
+			<p>为急性子准备的：在两分钟内学会如何使用CMake构建Ogre。 如果你遇到问题或是想了解更深， 请继续下面的步骤。</p>
+		</li>
+		<li><a href="./building_ogre/build_ogre_with_cmake.html" target="inner_content">使用CMake构建Ogre</a>
+			<p>这部分解释了如何使用CMake从源码构建Ogre</p>
+		</li>
+		<li><a href="./building_ogre/getting_started_with_cmake.html" target="inner_content">CMake入门</a>
+			<p>这部分向你介绍CMake中的概念， 解释概念并介绍如何获得和使用CMake</p>
+		</li>
+		<li><a href="./building_ogre/building_your_projects_with_cmake.html" target="inner_content">使用CMake构建你自己的工程</a>
+			<p>这部分介绍如何使用CMake构建你自己的工程， 并将他们和Ogre链接， 如需获得更多信息请访问CMake官网：<a href="http://www.cmake.org/">CMake官网</a></p>
+		</li>
+		<li><a href="./building_ogre/cmake_build_system.html" target="inner_content">使用CMake构建Ogre</a>
+			<p>这部分为需要使用CMake或扩展Ogre的CMake系统的开发者准备， 解释了他是如何工作的， 还包括你可以怎样扩展他。如果你需要向Ogre中添加源文件或是添加一个构建目标， 你需要这部分内容。</p>
+		</li>
+		<li><a href="./building_ogre/specific_build_guides.html" target="inner_content">特殊问题</a>
+			<p>这部分包括了针对特定设置和情况的详细构建指南， 作为上面指南的补充。 包括：使用boost1.0以上版本和MinGW构建Ogre</p>
+		</li>
+		<li><a href="./building_ogre/building_ogre_shoggoth.html" target="inner_content">构建旧版Ogre</a></li>
+	</ul>
+</div>
+</body>
+</html>
